@@ -37,6 +37,8 @@ def requires_authentication(function):
         if header:
             ctx = stack.top
             token = ''.join(header.split()[1:])
+            if token.startswith("TlRM"):
+                return _unauthorized()
             rc = _gssapi_authenticate(token)
             if rc == kerberos.AUTH_GSS_COMPLETE:
                 response = function(ctx.kerberos_user, *args, **kwargs)
