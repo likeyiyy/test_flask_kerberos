@@ -14,5 +14,5 @@ def hello_world():
 @app.route("/protected")
 @requires_authentication
 def protected_view(user):
-    return "你成功的访问我了。"
+    return user
 
